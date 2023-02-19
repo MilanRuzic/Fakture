@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="container shadow rounded bg-secondary mt-2 pb-2 pt-2">
+    <form (ngSubmit)="saveInvoice()" [formGroup]="invoiceForm">
+      <div class="row">
+        <div class="col-md-3">
+          <label class="fw-bold" for="invoiceNumber">Broj fakture</label>
+          <input class="form-control" type="text" id="invoiceNumber" name="invoiceNumber" formControlName="invoiceNumber" />
+          <div *ngIf="submitted">
+            <div *ngIf="invoiceNumber.invalid" class="error-message text-danger">
+              Broj fakture je obavezno polje!
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label class="fw-bold" for="partner">Partner</label>
+          <input class="form-control" type="text" id="partner" name="partner" formControlName="partner" />
+          <div *ngIf="submitted">
+            <div *ngIf="partner.invalid" class="error-message text-danger">
+              Partner fakture je obavezno polje!
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div *ngIf="showDatePicker" class="col-12">
+            <label class="fw-bold" for="date">Datum fakture</label>
+            <!--<date-picker formControlName="date"></date-picker> -->
+            <input type="date" class="form-control" id="date" name="date" formControlName="date" value="date" />
+          </div>
+        </div>
+        <div *ngIf="invoiceDetailsModel.invoiceId > 0" class="col-md-3">
+          <label class="fw-bold" for="amountWithoutVat">Iznos bez PDV</label>
+          <input [disabled]="true" class="form-control" type="number" id="amountWithoutVat" name="amountWithoutVat" [(ngModel)]="invoiceDetailsModel.amountWithoutVat" [ngModelOptions]="{standalone: true}" />
+        </div>
+      </div>
+
+
+      <div *ngIf="invoiceDetailsModel.invoiceId > 0" class="row">
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="rebate">Rabat</label>
+          <input [disabled]="true" class="form-control" type="number" id="rebate" name="amountWithoutVat" [(ngModel)]="invoiceDetailsModel.rebate" [ngModelOptions]="{standalone: true}" />
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="amountWithoutVatrebate">Iznos sa PDV </label>
+          <input [disabled]="true" class="form-control" type="number" id="amountWithoutVatrebate" name="amountWithoutVatrebate" [(ngModel)]="invoiceDetailsModel.amountWithoutVatrebate" [ngModelOptions]="{standalone: true}" />
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="amountVat">Iznos sa PDV </label>
+          <input [disabled]="true" class="form-control" type="number" id="amountVat" name="amountVat" [(ngModel)]="invoiceDetailsModel.amountVat" [ngModelOptions]="{standalone: true}" />
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="total">Ukupno </label>
+          <input [disabled]="true" class="form-control" type="number" id="total" name="total" [(ngModel)]="invoiceDetailsModel.total" [ngModelOptions]="{standalone: true}" />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-10 col-sm-10"></div>
+        <div class="col-md-1 col-sm-1">
+          <button style="background:none; border:none" type="submit">
+            <img src="../../../../assets/check-circle-fill.svg" />
+          </button>
+        </div>
+        <div class="col-md-1 col-sm-1">
+          <button style="background:none; border:none" type="reset" [routerLink]="['/invoice/invoice-list']">
+            <img src="../../../../assets/x-circle-fill.svg" />
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="mt-3">
+    <app-invoice-items-list *ngIf="invoiceDetailsModel.invoiceId > 0" [invoiceId]="invoiceDetailsModel.invoiceId"></app-invoice-items-list>
+  </div>
+</div>

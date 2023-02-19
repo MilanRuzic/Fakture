@@ -1,0 +1,28 @@
+<div class="container px-2">
+  <div class="row">
+    <form [formGroup]="loginForm" class="mt-2" (ngSubmit)="logIn()">
+      <div class="card cardBackground col-8 offset-2">
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="email" class="fw-bold mt-3 fontColor">Email*</label>
+          <input type="text" id="email" class="form-control mt-1" formControlName="email" />
+          <div *ngIf="submitted">
+            <div *ngIf="email.invalid" class="text-danger">Email je obavezno polje.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="login" class="fw-bold mt-3 fontColor">Lozinka*</label>
+          <input type="password" id="login" class="form-control mt-1" formControlName="password" />
+          <div *ngIf="submitted">
+            <div *ngIf="password.invalid" class="text-danger">Lozinka je obavezno polje.</div>
+          </div>
+        </div>
+        <div class="text-center mt-3 mb-3">
+          <button class="login">Uloguj se</button>
+        </div>
+        <div class="text-center mt-3 mb-3">
+          <a (click)="register()" class="register">Registracija</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

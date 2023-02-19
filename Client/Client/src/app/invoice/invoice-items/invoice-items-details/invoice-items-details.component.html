@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="container shadow rounded bg-secondary mt-2 pb-2 pt-2">
+    <form [formGroup]="invoiceForm" (ngSubmit)="saveInoviceItem()">
+      <div class="row">
+        <div class="col-md-3">
+          <label class="fw-bold" for="name">Naziv</label>
+          <input class="form-control" type="text" id="name" formControlName="name">
+          <div *ngIf="submitted">
+            <div *ngIf="name.invalid" class="text-danger">
+              Naziv je obavezno polje!
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="price">Cena</label>
+          <input class="form-control" id="price" type="number" formControlName="price">
+          <div *ngIf="submitted">
+            <div *ngIf="price.invalid" class="text-danger">
+              Cena je obavezno polje!
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="quantity">Količina</label>
+          <input class="form-control" id="quantity" type="number" formControlName="quantity">
+          <div *ngIf="submitted">
+            <div *ngIf="quantity.invalid" class="text-danger">
+              Kolicina je obavezno polje!
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="rebatePercent">Posto rabata</label>
+          <input class="form-control" id="rebatePercent" type="number" formControlName="rebatePercent">
+          <div *ngIf="submitted">
+            <div *ngIf="rebatePercent.invalid" class="text-danger">
+              Posto rabata je obavezno polje!
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="amountWithoutVat">Iznos bez PDV</label>
+          <input class="form-control" id="amountWithoutVat" [disabled]="true" type="number" [(ngModel)]="invoiceItemDetails.amountWithoutVat" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="rebate">Rabat</label>
+          <input class="form-control" id="rebate" [disabled]="true" type="number" [(ngModel)]="invoiceItemDetails.rebate" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="amountWithoutVatRebate">Iznos sa rabatom bez PDV</label>
+          <input class="form-control" id="amountWithoutVatRebate" [disabled]="true" type="number" [(ngModel)]="invoiceItemDetails.amountWithoutVatrebate" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="amountVat">PDV</label>
+          <input class="form-control" id="amountVat" [disabled]="true" type="number" [(ngModel)]="invoiceItemDetails.amountVat" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-md-3">
+          <label class="fw-bold" for="total">Ukupno</label>
+          <input class="form-control" id="total" [disabled]="true" type="number" [(ngModel)]="invoiceItemDetails.total" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="col-md-10 col-sm-10"></div>
+        <div class="col-md-1 col-sm-1">
+          <button style="background:none; border:none" type="submit">
+            <img src="../../../../assets/check-circle-fill.svg" />
+          </button>
+        </div>
+        <div class="col-md-1 col-sm-1">
+          <button style="background:none; border:none" type="reset" [routerLink]="['/invoice/edit-invoice/'+invoiceItemDetails.invoiceId]">
+            <img src="../../../../assets/x-circle-fill.svg" />
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

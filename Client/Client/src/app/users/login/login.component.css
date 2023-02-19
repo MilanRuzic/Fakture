@@ -1,0 +1,15 @@
+.register{
+    color:black;
+    cursor:pointer;
+    font-weight:bold;
+}
+.login{
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+.fontColor{
+    color:black;
+    font-weight:bold;
+}

@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+html,body{
+    min-height:100%;
+}
+
+table{
+    color:white;
+}
+.background {
+  background: linear-gradient(#41464b, #bcc5cd);
+  background-size: cover;
+}
+.textColor{
+    color:white;
+}
+.my-custom-scrollbar {
+  position: relative;
+  height:50vh;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+.cardBackground {
+  background-color: rgba(255,255,255,0.6);
+}

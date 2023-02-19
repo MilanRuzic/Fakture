@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="container shadow rounded bg-secondary mt-2">
+    <form (ngSubmit)="searchInvoices()" class="textColor">
+      <div class=" row">
+        <div class="col-md-3">
+          <label class="fw-bold" for="invoiceNumber">Broj fakture</label>
+          <input class="form-control" type="text" id="invoiceNumber" name="invoiceNumber" [(ngModel)]="invoicesSearch.invoiceNumber" />
+        </div>
+        <div class="col-md-3">
+          <label class="fw-bold" for="partner">Partner</label>
+          <input class="form-control" type="text" id="partner" name="invoicePartner" [(ngModel)]="invoicesSearch.partner" />
+        </div>
+      </div>
+      <div class="row mt-2 pb-2">
+        <div class="col-md-1 offset-4">
+          <button style="background:none; border:none" type="submit">
+            <img src="../../../../assets/search.svg" />
+          </button>
+        </div>
+        <div class="col-md-1">
+          <button style="background:none; border:none" type="button" [routerLink]="['/invoice/invoice-list']" (click)="clearSearch()">
+            <img src="../../../../assets/x-circle-fill.svg" />
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+    <div class="row mt-3 pb-2">
+      <div class="col-md-1">
+        <button style="background:none; border:none" type="button" [routerLink]="['/invoice/add-invoice']">
+          <img src="../../../../assets/plus-circle-fill.svg" />
+        </button>
+      </div>
+    </div>
+    <div class="table-container">
+      <table class="table table-bordered table-striped text-center rounded">
+        <thead class="bg-secondary table-header text-center">
+          <tr>
+            <th scope="col" style="width: 9%;">#</th>
+            <th scope="col" style="width: 13%;">Broj fakture</th>
+            <th scope="col" style="width: 13%;">Partner</th>
+            <th scope="col" style="width: 13%;">Iznos bez PDV</th>
+            <th scope="col" style="width: 13%;">Rabat</th>
+            <th scope="col" style="width: 13%;">Iznos sa PDV</th>
+            <th scope="col" style="width: 13%;">Ukupno</th>
+            <th scope="col" style="width: 13%;">Obriši</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoices;let row_num = index">
+            <td class="text-center border">{{row_num + 1}}</td>
+            <td class="text-center border"><a class="grid-link textColor" [routerLink]="['../edit-invoice',invoice.invoiceId]">{{invoice.invoiceNumber}}</a></td>
+            <td class="text-center border">{{invoice.partner}}</td>
+            <td class="text-center border">{{invoice.amountWithoutVat}}</td>
+            <td class="text-center border">{{invoice.rebate}}</td>
+            <td class="text-center border">{{invoice.amountVat}}</td>
+            <td class="text-center border">{{invoice.total}}</td>
+            <td class="text-center border">
+              <button style="background:none; border:none" (click)="deleteInvoice(invoice.invoiceId)">
+                <img width="20px" src="../../../../assets/trash3-fill.svg" />
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="invoices.length == 0 || invoices == null">
+            <td class="text-center border" colspan="8">Nema podataka!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+

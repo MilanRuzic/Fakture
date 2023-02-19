@@ -1,0 +1,64 @@
+<div class="container px-2">
+  <div class="row">
+    <form [formGroup]="registerForm" class="mt-2 mb-2" (ngSubmit)="register()">
+      <div class="card cardBackground col-8 offset-2">
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="name" class="fw-bold mt-3 fontColor">Ime*</label>
+          <input type="text" id="name" class="form-control mt-1" formControlName="name" />
+          <div *ngIf="submitted">
+            <div *ngIf="name.invalid" class="text-danger">Ime je obavezno polje.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="lastName" class="fw-bold mt-3 fontColor">Prezime*</label>
+          <input type="text" id="lastName" class="form-control mt-1" formControlName="lastName" />
+          <div *ngIf="submitted">
+            <div *ngIf="lastName.invalid" class="text-danger">Prezime je obavezno polje.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="phoneNumber" class="fw-bold mt-3 fontColor">Broj telefona</label>
+          <input type="text" id="phoneNumber" class="form-control mt-1" formControlName="phoneNumber" placeholder="066/623-222" />
+          <div *ngIf="submitted">
+            <div *ngIf="phoneNumber.errors?.['pattern']" class="text-danger">Broj telefona upisite u formatu 066/622-222.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="email" class="fw-bold mt-3 fontColor">Email*</label>
+          <input type="email" id="email" class="form-control mt-1" formControlName="email" />
+          <div *ngIf="submitted">
+            <div *ngIf="email.errors?.['required']" class="text-danger">Email je obavezno polje.</div>
+            <div *ngIf="email.errors?.['email']" class="text-danger">Pogrešna struktura email-a.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="login" class="fw-bold mt-3 fontColor">Lozinka*</label>
+          <input [type]="hide ? 'password' : 'text'" id="login" class="form-control mt-1" formControlName="password" />
+          <input type="checkbox" (click)="showHidePassword()"><label class="fontColor">Prikazi lozinku</label>
+          <div *ngIf="submitted">
+            <div *ngIf="password.errors?.['required']" class="text-danger">Lozinka je obavezno polje.</div>
+            <div *ngIf="password.errors?.['minlength']" class="text-danger">Lozinka mora da sadrži najmanje 8 karaktera.</div>
+            <div *ngIf="password.errors?.['pattern']" class="text-danger">Lozinka mora da sadrži malo slovo, veliko slovo, broj i specijalni karakter.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-sm-3 col-6 offset-3">
+          <label for="checkPassword" class="fw-bold mt-3 fontColor">Ponovi lozinku*</label>
+          <input [type]="hideCheckedPassword ? 'password' : 'text'" id="checkPassword" class="form-control mt-1" formControlName="checkPassword" />
+          <input type="checkbox" (click)="showHideCheckPassword()"><label class="fontColor">Prikazi potvrdjenu lozinku</label>
+          <div *ngIf="submitted">
+            <div *ngIf="checkPassword.errors?.['required']" class="text-danger">Potvrdi lozinku</div>
+            <div *ngIf="checkPassword.errors?.['matchingPasswords']" class="text-danger">Potvrdi lozinku</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="text-center mt-2 mb-2 col-6">
+            <button style="background:none;border:none; float:right;" type="submit"><img src="../../../assets/plus-circle-fill.svg" /></button>
+          </div>
+          <div  class="text-center mt-2 mb-2 col-6">
+            <button style="background: none; border: none; float:left;" type="reset" [routerLink]="['/users/login']"><img src="../../../assets/x-circle-fill.svg" /></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
