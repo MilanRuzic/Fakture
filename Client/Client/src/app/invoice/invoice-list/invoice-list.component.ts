@@ -32,7 +32,6 @@ export class InvoiceListComponent implements OnInit {
   clearSearch() {
     this.initSearchModel();
     console.log(this.invoicesSearch);
-    console.log("karina");
 
     this.searchInvoices();
   }
